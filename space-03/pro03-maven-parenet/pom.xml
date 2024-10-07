@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.sin.maven</groupId>
+  <artifactId>pro03-maven-parenet</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <!--当前工程作为父工程，它要去管理子工程，所以打包方式必须是pom-->
+  <packaging>pom</packaging>
+  
+  <name>pro03-maven-parenet</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <!--创建我们自定义的属性标签-->
+    <!--标签名: 属性名-->
+    <!--标签值: 属性值-->
+    <!--引用方式：${sin.spring.version}-->
+    <sin.spring.version>4.0.0.RELEASE</sin.spring.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+
+
+  <!--聚合的配置-->
+    <modules>
+        <module>pro04-maven-module</module>
+        <module>pro05-maven-module</module>
+        <module>pro06-maven-module</module>
+        <module>pro07-maven-module</module>
+        <module>pro13-module-my-plugin</module>
+    </modules>
+
+   <!--在父工程中统一管理依赖信息-->
+   <!--注意:即使在父工程配置了对依赖的管理，子工程需要使用具体哪一个依赖还是要明确配置。-->
+    <!-- 父工程统一管理依赖信息 -->
+    <!-- 使用dependencyManagement标签配置对依赖的管理 -->
+    <!-- 被管理的依赖并没有真正被引入到每个子工程 -->
+    <!-- 在子工程中还要指定依赖 -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-core</artifactId>
+                <!-- 自定义标签引用方式：${sin.spring.version}-->
+                <!--通过引用属性表达式设定版本号，这样版本号就成了一个动态值 -->
+                <!--通过属性名解析后才知道具体是什么值-->
+                <version>${sin.spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-beans</artifactId>
+                <version>5.2.5.RELEASE</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>5.2.5.RELEASE</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-expression</artifactId>
+                <version>5.2.5.RELEASE</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-aop</artifactId>
+                <version>5.2.5.RELEASE</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>
